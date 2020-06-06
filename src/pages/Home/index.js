@@ -36,13 +36,14 @@ const Home = () => {
             <p>Em acompanhamento</p>
           </div>
           <div className="footer">
-            <p>Últimas 24hrs</p>
+            <p>Últimas 24 horas</p>
           </div>
           <div className="container" id="new">
             <h4>30.830</h4>
             <p>Novos casos</p>
           </div>
         </div>
+        <br/>
         <div className="card" id="obitos">
           <div className="header">
             <p>Óbitos</p>
@@ -55,7 +56,7 @@ const Home = () => {
             <p>Letalidade</p>
           </div>
           <div className="footer">
-            <p>Últimas 24hrs</p>
+            <p>Últimas 24 horas</p>
           </div>
           <div className="container" id="new">
             <h4>1.005</h4>
