@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../../global.css';
 import './styles.css';
-import { parseISO, format, formatRelative, formatDistance} from 'date-fns';
-import pt from 'date-fns/locale/pt-BR';
 import api from '../../services/api';
-import api2 from '../../services/api2';
+// import api2 from '../../services/api2';
 
 const Home = () => {
 
   const [confirmados, setconfirmados] = useState('');
   const [obitos, setobitos] = useState('');
   const [geral, setgeral] = useState('');
-  const [otherAPI, setotherAPI] = useState('');
+  // const [otherAPI, setotherAPI] = useState('');
 
   useEffect(() => {
     api.get('').then(response => {
@@ -31,35 +29,35 @@ const Home = () => {
     })
   }, [geral]);
 
-  useEffect(() => {
-    api2.get('').then(response => {
-      setotherAPI(response.data);
-    })
-  }, [otherAPI]);
+  // useEffect(() => {
+  //   api2.get('').then(response => {
+  //     setotherAPI(response.data);
+  //   })
+  // }, [otherAPI]);
 
   return (
     <div>
       <div className="update">
         <h1>COVID Brasil</h1>
-        <p>Atualizado em: <br/> ({geral.dt_updated}) <br/>({otherAPI.updated})*</p>
+        <p>Atualizado em: {geral.dt_updated}</p>
       </div>
       <div id="content">
         <div className="card" id="confirmados">
           <div className="header">
-            <p>Confirmados</p>
+            <p>CONFIRMADOS</p>
           </div>
           <div className="container">
-            <h4>{otherAPI.casesMS} *</h4>
+            <h4>{confirmados.total}</h4>
             <p>Total</p>
             <br/>
-            <h4>{otherAPI.recovered} *</h4>
+            <h4>{confirmados.recuperados}</h4>
             <p>Recuperados</p>
             <br/>
             <h4>{confirmados.acompanhamento}</h4>
             <p>Em acompanhamento</p>
           </div>
           <div className="footer">
-            <p>Últimas 24 horas</p>
+            <p>ÚLTIMAS 24 HORAS</p>
           </div>
           <div className="container" id="new">
             <h4>{confirmados.novos}</h4>
@@ -69,17 +67,17 @@ const Home = () => {
         <br/>
         <div className="card" id="obitos">
           <div className="header">
-            <p>Óbitos</p>
+            <p>ÓBITOS</p>
           </div>
           <div className="container">
-            <h4>{otherAPI.deathsMS} *</h4>
+            <h4>{obitos.total}</h4>
             <p>Total</p>
             <br/>
             <h4>{obitos.letalidade}%</h4>
             <p>Letalidade</p>
           </div>
           <div className="footer">
-            <p>Últimas 24 horas</p>
+            <p>ÚLTIMAS 24 HORAS</p>
           </div>
           <div className="container" id="new">
             <h4>{obitos.novos}</h4>
@@ -88,8 +86,9 @@ const Home = () => {
         </div>
       </div>
       <div className="credit">
-        <p>Fontes: Ministério da Saúde</p>
-        <p>© Filipe Moreno</p>
+        <p>Fonte: <a href="https://covid.saude.gov.br/">Ministério da Saúde</a></p>
+        <br/>
+        <p>© <a href="https://github.com/FilipeMoreno">Filipe Moreno</a></p>
       </div>
     </div>
   );
