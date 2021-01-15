@@ -1,30 +1,41 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useMemo, useState } from 'react'
-import '../../global.css'
-import './styles.css'
-import api from '../../services/api'
+import React, { useEffect, useMemo, useState } from 'react';
+import '../../global.css';
+import './styles.css';
+import api from '../../services/api';
 import { format } from 'date-fns'
 import pt from 'date-fns/locale/pt-BR'
-// import api2 from '../../services/api2';
 
 const Home = () => {
-  const [dados, setDados] = useState('')
 
+  const [confirmados, setconfirmados] = useState('');
+  const [obitos, setobitos] = useState('');
+  const [geral, setgeral] = useState('');
+  
   const [date, setDate] = useState(new Date())
   const dateFormatted = useMemo(
     () => format(date, "d 'de' MMMM 'de' yyyy 'às' HH:MM", { locale: pt }),
     [date]
   )
+
   useEffect(() => {
-    api
-      .get('')
-      .then(response => {
-        setDados(response.data)
-      })
-      .catch(err => {
-        console.log('Erro na API', err)
-      })
-  }, [dados])
+    api.get('').then(response => {
+      setconfirmados(response.data.confirmados);
+    })
+  }, [confirmados]);
+
+  useEffect(() => {
+    api.get('').then(response => {
+      setobitos(response.data.obitos);
+    })
+  }, [obitos]);
+
+  useEffect(() => {
+    api.get('').then(response => {
+      setgeral(response.data);
+    })
+  }, [geral]);
+
+  setDate(geral.dt_updated);
 
   return (
     <div>
@@ -38,55 +49,51 @@ const Home = () => {
             <p>CONFIRMADOS</p>
           </div>
           <div className="container">
-            <h4>{dados.confirmados.total}</h4>
+            <h4>{confirmados.total}</h4>
             <p>Total</p>
-            <br />
-            <h4>{dados.confirmados.recuperados}</h4>
+            <br/>
+            <h4>{confirmados.recuperados}</h4>
             <p>Recuperados</p>
-            <br />
-            <h4>{dados.confirmados.acompanhamento}</h4>
+            <br/>
+            <h4>{confirmados.acompanhamento}</h4>
             <p>Em acompanhamento</p>
           </div>
           <div className="footer">
             <p>ÚLTIMAS 24 HORAS</p>
           </div>
           <div className="container" id="new">
-            <h4>{dados.confirmados.novos}</h4>
+            <h4>{confirmados.novos}</h4>
             <p>Novos casos</p>
           </div>
         </div>
-        <br />
+        <br/>
         <div className="card" id="obitos">
           <div className="header">
             <p>ÓBITOS</p>
           </div>
           <div className="container">
-            <h4>{dados.obitos.total}</h4>
+            <h4>{obitos.total}</h4>
             <p>Total</p>
-            <br />
-            <h4>{dados.obitos.letalidade}%</h4>
+            <br/>
+            <h4>{obitos.letalidade}%</h4>
             <p>Letalidade</p>
           </div>
           <div className="footer">
             <p>ÚLTIMAS 24 HORAS</p>
           </div>
           <div className="container" id="new">
-            <h4>{dados.obitos.novos}</h4>
+            <h4>{obitos.novos}</h4>
             <p>Novos óbitos</p>
           </div>
         </div>
       </div>
       <div className="credit">
-        <p>
-          Fonte: <a href="https://covid.saude.gov.br/">Ministério da Saúde</a>
-        </p>
-        <br />
-        <p>
-          © <a href="https://github.com/FilipeMoreno">Filipe Moreno</a>
-        </p>
+        <p>Fonte: <a href="https://covid.saude.gov.br/">Ministério da Saúde</a></p>
+        <br/>
+        <p>© <a href="https://github.com/FilipeMoreno">Filipe Moreno</a></p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
