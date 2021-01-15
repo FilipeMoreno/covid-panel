@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import '../../global.css';
 import './styles.css';
 import api from '../../services/api';
+import {format} from 'date-fns'
+import pt from 'date-fns/locale/pt-BR'
 // import api2 from '../../services/api2';
 
 const Home = () => {
@@ -29,6 +31,12 @@ const Home = () => {
     })
   }, [geral]);
 
+  const [date, setDate] = useState(new Date())
+  const dateFormatted = useMemo(
+    () => format(date, "d 'de' MMMM 'de' yyyy 'às' HH:MM", { locale: pt }),
+    [date]
+  )
+
   // useEffect(() => {
   //   api2.get('').then(response => {
   //     setotherAPI(response.data);
@@ -39,7 +47,7 @@ const Home = () => {
     <div>
       <div className="update">
         <h1>COVID Brasil</h1>
-        <p>Atualizado em: {geral.dt_updated}</p>
+        <p>Atualizado em: {dateFormatted}</p>
       </div>
       <div id="content">
         <div className="card" id="confirmados">
