@@ -18,13 +18,14 @@
 }
 
 .credit {
-  font-size: 14px;
+  font-size: 16px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: rgb(170, 170, 175);
+  text-align: center;
   font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background-color: #202124; */
 }
 
 .credit a{
@@ -48,7 +49,7 @@ h4 {
   width: 48%;
   border: 2px;
   background: white;
-  border-radius: 15px;
+  /* ***border-radius: 5px 5px 0px 0px; */
 
   text-align: center;
   display: table;
@@ -63,7 +64,7 @@ h4 {
 }
 
 .card .header {
-  border-radius: 15px 15px 0px 0px;
+  /* ***border-radius: 5px 5px 0px 0px; */
   height: 50px;
   color: white;
   text-align: center;
@@ -84,7 +85,7 @@ h4 {
 }
 
 .card#confirmados .header {
-  background: green;
+  background: rgba(11, 156, 49, 1);
   font-family: Ubuntu;
   font-size: 22px;
 }
@@ -113,6 +114,8 @@ h4 {
 
 .card#obitos .header {
   background: rgb(8, 7, 5);
+
+  /* border-style: solid; */
   font-size: 22px;
   font-family: Ubuntu;
 }
@@ -125,7 +128,7 @@ h4 {
   font-size: 18px;
   margin: 0 auto;
   color: white;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 0px 0px 0px 0px;
 }
 
 .container p {

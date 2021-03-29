@@ -15,7 +15,7 @@ body {
   background: #F0F0F5;
   -webkit-font-smoothing: antialiased;
   color: var(--text-color);
-  background-color: #202124;
+  background-color: #2c2c2c;
 }
 
 body, input, button {

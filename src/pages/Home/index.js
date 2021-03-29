@@ -1,21 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import NumberFormat from 'react-number-format'
 import '../../global.css';
 import './styles.css';
 import api from '../../services/api';
-import { format } from 'date-fns'
-import pt from 'date-fns/locale/pt-BR'
 
 const Home = () => {
 
   const [confirmados, setconfirmados] = useState('');
   const [obitos, setobitos] = useState('');
   const [geral, setgeral] = useState('');
-  
-  const [date, setDate] = useState(new Date())
-  const dateFormatted = useMemo(
-    () => format(date, "d 'de' MMMM 'de' yyyy 'às' HH:MM", { locale: pt }),
-    [date]
-  )
+  const [atualizacao, setAtualizacao] = useState('');
 
   useEffect(() => {
     api.get('').then(response => {
@@ -35,13 +29,22 @@ const Home = () => {
     })
   }, [geral]);
 
-  setDate(geral.dt_updated);
+  useEffect(() => {
+    api.get('').then(response => 
+      setAtualizacao(Intl.DateTimeFormat("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      }).format(new Date(response.data.dt_updated))));
+  }, [atualizacao]);
 
   return (
     <div>
       <div className="update">
-        <h1>COVID Brasil</h1>
-        <p>Atualizado em: {dateFormatted}</p>
+        <h1>COVID Brasil <img src="https://i.redd.it/bkvfpgdjz3z01.png" alt="Bandeira" height="25" /></h1>
+        <p>Atualizado em: {atualizacao}</p>
       </div>
       <div id="content">
         <div className="card" id="confirmados">
@@ -49,20 +52,20 @@ const Home = () => {
             <p>CONFIRMADOS</p>
           </div>
           <div className="container">
-            <h4>{confirmados.total}</h4>
+            <h4><NumberFormat value={confirmados.total} thousandSeparator={true} displayType={'text'} /></h4>
             <p>Total</p>
             <br/>
-            <h4>{confirmados.recuperados}</h4>
+            <h4><NumberFormat value={confirmados.recuperados} thousandSeparator={true} displayType={'text'} /></h4>
             <p>Recuperados</p>
             <br/>
-            <h4>{confirmados.acompanhamento}</h4>
+            <h4><NumberFormat value={confirmados.acompanhamento} thousandSeparator={true} displayType={'text'} /></h4>
             <p>Em acompanhamento</p>
           </div>
           <div className="footer">
             <p>ÚLTIMAS 24 HORAS</p>
           </div>
           <div className="container" id="new">
-            <h4>{confirmados.novos}</h4>
+            <h4><NumberFormat value={confirmados.novos} thousandSeparator={true} displayType={'text'} /></h4>
             <p>Novos casos</p>
           </div>
         </div>
@@ -72,25 +75,26 @@ const Home = () => {
             <p>ÓBITOS</p>
           </div>
           <div className="container">
-            <h4>{obitos.total}</h4>
+            <h4><NumberFormat value={obitos.total} thousandSeparator={true} displayType={'text'} /></h4>
             <p>Total</p>
             <br/>
-            <h4>{obitos.letalidade}%</h4>
+            <h4><NumberFormat value={obitos.letalidade} thousandSeparator={true} displayType={'text'} />%</h4>
             <p>Letalidade</p>
           </div>
           <div className="footer">
             <p>ÚLTIMAS 24 HORAS</p>
           </div>
           <div className="container" id="new">
-            <h4>{obitos.novos}</h4>
+            <h4><NumberFormat value={obitos.novos} thousandSeparator={true} displayType={'text'} /></h4>
             <p>Novos óbitos</p>
           </div>
         </div>
+        
       </div>
       <div className="credit">
         <p>Fonte: <a href="https://covid.saude.gov.br/">Ministério da Saúde</a></p>
-        <br/>
         <p>© <a href="https://github.com/FilipeMoreno">Filipe Moreno</a></p>
+        <br />
       </div>
     </div>
   );
