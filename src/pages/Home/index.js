@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NumberFormat from 'react-number-format'
 import '../../global.css';
 import './styles.css';
@@ -93,7 +93,7 @@ const Home = () => {
       </div>
       <div className="credit">
         <p>Fonte: <a href="https://covid.saude.gov.br/">Ministério da Saúde</a></p>
-        <p>© <a href="https://github.com/FilipeMoreno">Filipe Moreno</a></p>
+        <p>© <a href="https://github.com/FilipeMoreno">Filipe Moreno - v1.2.1</a></p>
         <br />
       </div>
     </div>
