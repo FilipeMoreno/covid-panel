@@ -12,25 +12,25 @@ const Home = () => {
   const [atualizacao, setAtualizacao] = useState('');
 
   useEffect(() => {
-    api.get('').then(response => {
+    api.get().then(response => {
       setconfirmados(response.data.confirmados);
     })
   }, [confirmados]);
 
   useEffect(() => {
-    api.get('').then(response => {
+    api.get().then(response => {
       setobitos(response.data.obitos);
     })
   }, [obitos]);
 
   useEffect(() => {
-    api.get('').then(response => {
+    api.get().then(response => {
       setgeral(response.data);
     })
   }, [geral]);
 
   useEffect(() => {
-    api.get('').then(response => 
+    api.get().then(response => 
       setAtualizacao(Intl.DateTimeFormat("pt-BR", {
         hour: "2-digit",
         minute: "2-digit",

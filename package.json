@@ -1,7 +1,7 @@
 {
-  "name": "covid",
+  "name": "CovidPanel",
   "version": "1.2.1",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -14,6 +14,16 @@
     "react-number-format": "^4.5.1",
     "react-scripts": "3.4.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilipeMoreno/covid-panel.git"
+  },
+  "author": {
+    "name": "Filipe Moreno",
+    "email": "eu@filipemoreno.xyz",
+    "url": "https://github.com/FilipeMoreno/"
+  },
+  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
